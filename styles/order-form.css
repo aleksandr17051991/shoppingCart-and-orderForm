@@ -1,0 +1,124 @@
+main.content  {
+  justify-content: end;
+}
+
+/* FORM STYLES */
+
+.form-container {
+  position: relative;
+  width: 50%;
+  padding: 40px;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(249, 192, 107, 0.673);
+}
+
+.form-container h2 {
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(98, 58, 12);
+}
+
+.form-group {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid rgb(98, 58, 12);
+  margin: 30px 0;
+}
+
+.form-group label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(98, 58, 12);
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: all .3s;
+}
+
+
+.form-group input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(98, 58, 12);
+  padding: 0 10px;
+}
+
+.form-group input:focus~label {
+  top: -5px;
+  font-size: 16px;
+}
+
+.form-group input:valid~label {
+  top: -5px;
+  font-size: 16px;
+}
+
+.form-group select {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  color: rgb(98, 58, 12);
+}
+
+.form-group select option {
+  text-align: end;
+}
+
+.follow-container input {
+  margin-right: 10px;
+  accent-color: rgb(249, 146, 28);
+}
+
+.follow-container label {
+  font-size: 18px;
+  color: rgb(98, 58, 12);
+}
+
+.btns-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  margin-right: 20px;
+}
+
+.submit-btn button,
+.reset-btn button {
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: rgb(98, 58, 12);
+  cursor: pointer;
+}
+
+.submit-btn button {
+  background-color: rgb(249, 146, 28);
+  padding: 10px 70px;
+}
+
+.reset-btn button {
+  padding: 10px 20px;
+  background-color: rgb(249, 115, 85);
+}
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/order-form.css">
+  <title>Order form</title>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <ul class="nav-container">
+        <li>
+          <div class="logo">
+            <p>STORE.COM</p>
+          </div>
+        </li>
+        <li>
+          <div class="navigation">
+            <a href="#" rel="noopener noreferrer">About us</a>
+            <a href="#"  rel="noopener noreferrer">Store items</a>
+            <a href="#"  rel="noopener noreferrer">Contacts</a>
+          </div>
+        </li>
+      </ul>
+    </header>
+    <main class="content">
+      <div class="form-container">
+        <h2>Shipping Order form</h2>
+        <form>
+          <div class="form-group">
+            <input type="text" name="First_Name" id="first-name" autocomplete="off" required>
+            <label class="lb" for="first-name">First name</label>
+          </div>
+          <div class="form-group">
+            <input type="text" name="Last_Name" id="last-name" autocomplete="off" required>
+            <label for="last-name">Last name</label>
+          </div>
+          <div class="form-group">
+            <input type="email" name="Email" id="email" autocomplete="off" required>
+            <label for="email">Email</label>
+          </div>
+          <div class="form-group">
+            <input type="text" name="Shipment" id="shipment-address" autocomplete="off" required>
+            <label for="shipment-address">Shipment address</label>
+          </div>
+          <div class="form-group">
+            <label for="sizes">Select size</label>
+            <select name="Size" id="sizes" required>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+              <option>XXL</option>
+            </select>
+          </div>
+          <div class="follow-container">
+            <input type="checkbox" name="followed" id="followed">
+            <label for="followed">I want to follow for news!</label>
+          </div>
+          <div class="btns-container">
+            <div class="submit-btn">
+              <button id="send-btn" type="submit">Send</button>
+            </div>
+            <div class="reset-btn">
+              <button id="reset">Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <ul class="nav-container">
+        <li>
+          <div class="logo">
+            <p>STORE.COM</p>
+          </div>
+        </li>
+        <li>
+          <div class="navigation">
+            <a href="#" target="_blank" rel="noopener noreferrer">About us</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Store items</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Contacts</a>
+          </div>
+        </li>
+      </ul>
+    </footer>
+  </div>
+
+  
+  <script defer type="module" src="../js/order_form.js"></script>
+</body>
+</html>
