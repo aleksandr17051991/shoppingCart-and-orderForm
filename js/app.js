@@ -44,7 +44,7 @@ for (let i = 0; i < toBasketBtn.length; i = i + 1) {
 // rout hendlers with buttons
 CART.addEventListener('click', openCartContent);
 
-buyBtn.addEventListener('click', goOrderForm);
+buyBtn.addEventListener('click', goOrderForm); // !!!! MUST be relocated to cart.js
 
 
 

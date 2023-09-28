@@ -11,7 +11,9 @@ const backToShopBtn = document.querySelector('.comeback-btn');
 const PRODUCT_CARD = document.querySelector('.products');
 const CART = document.querySelector('#cart');
 const CART_BODY = document.querySelector('.cart-content');
-const CART_CONTENT = document.querySelector('#cart-info')
+const CART_CONTENT = document.querySelector('#cart-info');
+const TOTAL_BLOCK = document.querySelector('.total-container');
+const NUMBER_UNITS_ICON = document.querySelector('.prod-amount')
 
 export {
   LOGO,
@@ -27,5 +29,7 @@ export {
   PRODUCT_CARD,
   CART,
   CART_BODY,
-  CART_CONTENT
+  CART_CONTENT,
+  TOTAL_BLOCK,
+  NUMBER_UNITS_ICON
 }

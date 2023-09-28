@@ -3,7 +3,7 @@ const products = [
     id: 0,
     name: "T-shirt 1",
     price: 29.99,
-    instock: 100,
+    instock: 7,
     description:
       "Some interesting T-shirt. And more information...",
     imgSrc: "../assets/img/t-shirt.png",
@@ -12,7 +12,7 @@ const products = [
     id: 1,
     name: "T-shirt 2",
     price: 24.99,
-    instock: 43,
+    instock: 5,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, error.",
     imgSrc: "../assets/img/t2.png",
