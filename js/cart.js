@@ -3,7 +3,9 @@ import { CART_CONTENT, TOTAL_BLOCK, NUMBER_UNITS_ICON } from "../constants/const
 
 
 // cart's data arr 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+updateCart();
+
 
 // ADD PRODUCTS TO CART
 function addToCart(id) {
@@ -22,6 +24,8 @@ function addToCart(id) {
 function updateCart() {
   renderCartItems();
   renderTotal();
+
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 // render total block + calculate price and items
@@ -55,6 +59,7 @@ function renderCartItems() {
     CART_CONTENT.innerHTML += ` 
               <div class="cart-item">
                 <div class="item-info">
+                  <div class="delete-item" data-item-id="${id}">+</div>
                   <div class="item-img">
                     <img src="${imgSrc}" alt="${name}">
                   </div>
@@ -84,6 +89,8 @@ CART_CONTENT.addEventListener('click', (event) => {
     changeNumberOfUnits('minus', cartItemId);
   } else if (currentTarget.classList.contains('btn-plus')) {
     changeNumberOfUnits('plus', cartItemId);
+  } else if (currentTarget.classList.contains('delete-item')) {
+    removeCartItem(cartItemId);
   }
 })
 
@@ -108,7 +115,13 @@ function changeNumberOfUnits(action, itemId) {
 }
 
 
+// remove cart element
+function removeCartItem(itemId) {
+  console.log(itemId);
 
+  cart = cart.filter((item) => item.id !== itemId);
+  updateCart();
+}
 
 
 

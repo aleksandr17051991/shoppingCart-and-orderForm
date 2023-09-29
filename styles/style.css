@@ -220,9 +220,6 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 7px;
-}
-
-.cart-item:nth-child(n+2) {
   margin-top: 10px;
 }
 
@@ -232,6 +229,28 @@ footer {
   background-color: rgba(255, 255, 255, 0.343);
   border-radius: 7px;
   padding-right: 7px;
+  position: relative;
+}
+
+.delete-item {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -7px;
+  right: -15px;
+  border-radius: 50%;
+  background-color: rgb(238, 123, 110);
+  transform: rotate(45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-item:hover {
+  background-color: rgb(240, 73, 55);
 }
 
 .item-img {
@@ -265,9 +284,15 @@ footer {
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.343);
   cursor: pointer;
+  transition: .2s ease;
+}
+
+.btn-minus:hover,
+.btn-plus:hover {
+  background-color: rgba(255, 255, 255, 0.64);
 }
 
 .current-unit {
-  padding: 0 7px;
+  padding: 0 10px;
   font-size: 20px;
 }
