@@ -1,6 +1,38 @@
 main.content  {
-  justify-content: end;
+  justify-content: space-around;
 }
+
+/* ordered items */
+
+.ordered-item {
+  width: 300px;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  padding: 7px;
+  box-shadow: 0 0 30px rgba(249, 192, 107, 0.673);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ordered-item:nth-child(n+2) {
+  margin-top: 10px;
+}
+
+.ordered-item h3,
+.ordered-item p {
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(98, 58, 12);
+}
+
+.item-photo {
+  margin-top: 10px;
+  max-width: 100px;
+}
+
 
 /* FORM STYLES */
 
