@@ -142,6 +142,7 @@ main.content  {
   font-weight: 900;
   color: rgb(98, 58, 12);
   cursor: pointer;
+  transition: .3s ease;
 }
 
 .submit-btn button {
@@ -154,3 +155,9 @@ main.content  {
   background-color: rgb(249, 115, 85);
 }
 
+
+.submit-btn button:hover,
+.reset-btn button:hover {
+  transform: scale(1.05);
+  box-shadow: 1px 1px 15px rgb(81, 79, 79);
+}

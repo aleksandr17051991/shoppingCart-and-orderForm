@@ -59,6 +59,10 @@ footer {
 }
 
 .prod-amount {
+  display: none;
+}
+
+.prod-amount.active {
   display: flex;
   justify-content: center;
   align-items: center;

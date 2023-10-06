@@ -1,5 +1,6 @@
-import products from "./server.js";
-import { CART_CONTENT, TOTAL_BLOCK, NUMBER_UNITS_ICON } from "../constants/constants.js";
+import products from "../server/server.js";
+import { BUY_BTN, CART_CONTENT, TOTAL_BLOCK, NUMBER_UNITS_ICON } from "../constants/constants.js";
+import { goOrderForm } from "../helpers/event_handlers.js";
 
 
 // cart's data arr 
@@ -46,7 +47,14 @@ function renderTotal() {
                   <p>$<span> ${totalPrice.toFixed(2)}</span></p>
                 </div>
   `;
+
   NUMBER_UNITS_ICON.textContent = totalItems;
+
+  if (parseInt(NUMBER_UNITS_ICON.innerText)) {
+    NUMBER_UNITS_ICON.classList.add('active')
+  } else {
+    NUMBER_UNITS_ICON.classList.remove('active')
+  }
 }
 
 // render items in cart's block
@@ -79,7 +87,7 @@ function renderCartItems() {
 }
 
 // event delegation for btns - minus/plus
-CART_CONTENT.addEventListener('click', (event) => {
+CART_CONTENT.addEventListener('click', function(event) {
   event.preventDefault();
   
   const currentTarget = event.target;
@@ -106,7 +114,6 @@ function changeNumberOfUnits(action, itemId) {
         unitNmb = unitNmb + 1;
       }
     }
-    console.log(cart);
     return { ...item, nmbOfUnits: unitNmb}
   })
 
@@ -117,12 +124,11 @@ function changeNumberOfUnits(action, itemId) {
 
 // remove cart element
 function removeCartItem(itemId) {
-  console.log(itemId);
-
   cart = cart.filter((item) => item.id !== itemId);
   updateCart();
 }
 
-
+// route to order form page
+BUY_BTN.addEventListener('click', goOrderForm);
 
 export { addToCart };

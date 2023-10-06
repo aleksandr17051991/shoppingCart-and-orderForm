@@ -1,15 +1,15 @@
-import { formFields, contentCheck, CART_BODY } from "../constants/constants.js";
+import { FORM_FIELDS, CHECKING_CONTAINER, CART_BODY, CART_ORDERS, ORDERED_ITEMS_CONTENT, LS_CART_ITEMS } from "../constants/constants.js";
 
 
 export function goOrderForm(e) {
   e.preventDefault();
-  window.location.href = '/components/order-form.html';
+  window.location.href = '/pages/order-form.html';
 }
 
 export function goSuccesPage(e) {
   e.preventDefault();
 
-  window.location.href = '/components/success.html';
+  window.location.href = '/pages/success.html';
   localStorage.clear()
 }
 
@@ -20,12 +20,12 @@ export function goToShopPage (e) {
 
 export function goCheckingPage(e) {
   e.preventDefault();
-  window.location.href = '/components/check-form.html';
+  window.location.href = '/pages/check-form.html';
 }
 
 export function innitialCheckingForm() {
-  for (let i=0; i<formFields.length; i=i+1) {
-    const field = formFields[i];
+  for (let i = 0; i < FORM_FIELDS.length; i = i + 1) {
+    const field = FORM_FIELDS[i];
     
     if (field.type === 'checkbox') {
       field.checked = JSON.parse(localStorage.getItem(field.name));
@@ -34,17 +34,16 @@ export function innitialCheckingForm() {
     }
   }
 
-  const cartOrders = document.querySelector('.cart-order'); //redirect to constants.js
-  const cartItems = JSON.parse(localStorage.getItem('cart'));
-  for (let i = 0; i < cartItems.length; i = i + 1) {
-    const { id, name, imgSrc, price, nmbOfUnits } = cartItems[i];
-    cartOrders.innerHTML += `
+  for (let i = 0; i < LS_CART_ITEMS.length; i = i + 1) {
+    const { id, name, imgSrc, price, nmbOfUnits } = LS_CART_ITEMS[i];
+    CART_ORDERS.innerHTML += `
           <div class="ordered-item">
             <h3>${name}</h3>
             <div class="item-photo">
               <img src="${imgSrc}" alt="${name}">
             </div>
             <p>order unit: ${nmbOfUnits}</p>
+            <p>total: ${price * nmbOfUnits} $</p>
             <div class="form-group">
               <label for="size${id}">Select size</label>
               <select name="Size" id="size${id}" class="sizes" data-id="${id}" required>
@@ -58,6 +57,16 @@ export function innitialCheckingForm() {
             </div>
           </div>
     `;
+
+    if (!LS_CART_ITEMS[i].size) {
+      LS_CART_ITEMS[i].size = "XS";
+      localStorage.setItem("cart", JSON.stringify(LS_CART_ITEMS));
+    }
+
+    const sizesFields = document.querySelectorAll('.sizes');
+    sizesFields.forEach((item, index) => {
+      item.value = LS_CART_ITEMS[index].size
+    })
   }
 }
 
@@ -71,19 +80,29 @@ export function storeData(e) {
   }
 }
 
-// export function storeSize(e) {
-//   e.preventDefault();
-
-//   console.log(e.target.dataset.id);
-
-// }
+export function storeSize(e) {
+  e.preventDefault();
+ 
+  const elemID = parseInt(e.target.dataset.id);
+  const size = e.target.value;
+  
+  for (let i=0; i<LS_CART_ITEMS.length; i= i+1) {
+    if(LS_CART_ITEMS[i].id === elemID) {
+      LS_CART_ITEMS[i].size = size
+      localStorage.setItem("cart", JSON.stringify(LS_CART_ITEMS))
+    } 
+  }
+}
 
 export function resetData(e) {
   e.preventDefault();
-  localStorage.clear();
 
-  for (let i=0; i<formFields.length; i = i + 1) {
-    const field = formFields[i];
+  const cartStorage = localStorage.getItem("cart")
+  localStorage.clear();
+  localStorage.setItem("cart", cartStorage)
+
+  for (let i=0; i<FORM_FIELDS.length; i = i + 1) {
+    const field = FORM_FIELDS[i];
 
     if (field.tagName.toLowerCase() === 'select') {
       field.selectedIndex = 0;
@@ -97,29 +116,36 @@ export function resetData(e) {
 
 export function createUserInfo() {
   let userDataHTML = '';
+  let orderedItems = '';
 
   for (let i=0; i<localStorage.length; i = i + 1) {
     const key = localStorage.key(i);
     const value = localStorage.getItem(key);
 
     if (key === "cart") {
-      console.log(key); //// need to add logic!!!!!
+      const cartVal = JSON.parse(value)
+      let total = 0;
+      cartVal.forEach((item) => {
+        total = total + (item.price * item.nmbOfUnits)
+        orderedItems += `
+        <div class="ordered-product">
+          <p>${item.name} (size ${item.size}):</p>
+          <p>${item.nmbOfUnits} items</p>
+        </div>
+      `;
+      })
+      orderedItems += `<div class="ordered-total">total: ${total} $</div>`
+      
     } else if(key === 'followed') {
       const parsedVal = JSON.parse(value) ? 'followed' : `don't followed`;
       userDataHTML += `<p class="check-info">You ${parsedVal} for our daily updates !</p>` 
     } else {
       userDataHTML += `<p class="check-info">${key}: ${value}</p>`
     }
-    
-    // if(key === 'followed') {
-    //   const parsedVal = JSON.parse(value) ? 'followed' : `don't followed`;
-    //   userDataHTML += `<p class="check-info">You ${parsedVal} for our daily updates !</p>` 
-    // } else {
-    //   userDataHTML += `<p class="check-info">${key}: ${value}</p>`
-    // }
   }
 
-  contentCheck.innerHTML = userDataHTML;
+  CHECKING_CONTAINER.innerHTML = userDataHTML;
+  ORDERED_ITEMS_CONTENT.innerHTML = orderedItems;
 }
 
 export function openCartContent(e) {
