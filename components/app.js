@@ -1,5 +1,5 @@
-import { BODY, PRODUCT_CARD, CART, CART_BODY, NUMBER_UNITS_ICON } from '../constants/constants.js';
-import { openCartContent } from '../helpers/event_handlers.js';
+import { BODY, PRODUCT_CARD, CART, NUMBER_UNITS_ICON } from '../constants/constants.js';
+import { openCartContent, closeCartWindow } from '../helpers/event_handlers.js';
 import products from "../server/server.js";
 import { addToCart } from './cart.js';
 
@@ -17,7 +17,7 @@ function renderProduct() {
             <div class="prod-info">
               <p>${price} $</p>
               <p>${description}</p>
-              <button id="to-cart" data-product-id="${id}">To Cart</button>
+              <button id="to-cart" class="to-cart" data-product-id="${id}">To Cart</button>
             </div>
           </div>
         </div>
@@ -25,23 +25,11 @@ function renderProduct() {
     
     PRODUCT_CARD.innerHTML += contentCard;
   }); 
-}
+};
 
-renderProduct()
+renderProduct();
 
-// closing cart component
-BODY.addEventListener('click', function(event) {
-  if (event.target !== CART_BODY &&
-      !CART_BODY.contains(event.target) &&
-      !(event.target.classList.contains('cart-icon')) && 
-      !(event.target.classList.contains('prod-amount')) &&
-      !(event.target.id === 'to-cart') && 
-      !(event.target.classList.contains('btn-minus')) && 
-      !(event.target.classList.contains('btn-plus')) && 
-      !(event.target.classList.contains('delete-item'))) {
-    CART_BODY.classList.remove('active');
-  }
-});
+BODY.addEventListener('click', closeCartWindow);
 
 // work with rendered buttons "to cart"
 PRODUCT_CARD.addEventListener('click', function(e) {

@@ -24,9 +24,7 @@ export function goCheckingPage(e) {
 }
 
 export function innitialCheckingForm() {
-  for (let i = 0; i < FORM_FIELDS.length; i = i + 1) {
-    const field = FORM_FIELDS[i];
-    
+  for (const field of FORM_FIELDS) {    
     if (field.type === 'checkbox') {
       field.checked = JSON.parse(localStorage.getItem(field.name));
     } else {
@@ -34,8 +32,8 @@ export function innitialCheckingForm() {
     }
   }
 
-  for (let i = 0; i < LS_CART_ITEMS.length; i = i + 1) {
-    const { id, name, imgSrc, price, nmbOfUnits } = LS_CART_ITEMS[i];
+  for (const item of LS_CART_ITEMS) {
+    const { id, name, imgSrc, price, nmbOfUnits } = item;
     CART_ORDERS.innerHTML += `
           <div class="ordered-item">
             <h3>${name}</h3>
@@ -58,8 +56,8 @@ export function innitialCheckingForm() {
           </div>
     `;
 
-    if (!LS_CART_ITEMS[i].size) {
-      LS_CART_ITEMS[i].size = "XS";
+    if (!item.size) {
+      item.size = "XS";
       localStorage.setItem("cart", JSON.stringify(LS_CART_ITEMS));
     }
 
@@ -86,9 +84,9 @@ export function storeSize(e) {
   const elemID = parseInt(e.target.dataset.id);
   const size = e.target.value;
   
-  for (let i=0; i<LS_CART_ITEMS.length; i= i+1) {
-    if(LS_CART_ITEMS[i].id === elemID) {
-      LS_CART_ITEMS[i].size = size
+  for (const item of LS_CART_ITEMS) {
+    if(item.id === elemID) {
+      item.size = size
       localStorage.setItem("cart", JSON.stringify(LS_CART_ITEMS))
     } 
   }
@@ -101,9 +99,7 @@ export function resetData(e) {
   localStorage.clear();
   localStorage.setItem("cart", cartStorage)
 
-  for (let i=0; i<FORM_FIELDS.length; i = i + 1) {
-    const field = FORM_FIELDS[i];
-
+  for (const field of FORM_FIELDS) {
     if (field.tagName.toLowerCase() === 'select') {
       field.selectedIndex = 0;
     } else if (field.type === 'checkbox') {
@@ -118,7 +114,7 @@ export function createUserInfo() {
   let userDataHTML = '';
   let orderedItems = '';
 
-  for (let i=0; i<localStorage.length; i = i + 1) {
+  for (let i=0; i<localStorage.length; i += 1) {
     const key = localStorage.key(i);
     const value = localStorage.getItem(key);
 
@@ -153,4 +149,22 @@ export function openCartContent(e) {
   CART_BODY.classList.toggle('active');
 }
 
+export function closeCartWindow(event) {
+  event.preventDefault();
 
+  const currentTarget = event.target;
+  const classesToCheck = [
+    "cart-content",
+    "cart-icon",
+    "prod-amount",
+    "to-cart",
+    "btn-minus",
+    "btn-plus",
+    "delete-item"
+  ];
+
+  if (!CART_BODY.contains(currentTarget) &&
+      !classesToCheck.some((className) => currentTarget.classList.contains(className))) {
+    CART_BODY.classList.remove('active');
+  }
+}

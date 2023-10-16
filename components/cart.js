@@ -13,7 +13,6 @@ function addToCart(id) {
   const prodItem = products.find((product) => product.id === id);
 
   if (cart.some((cartItem) => cartItem.id === id)) {
-    console.log('You already added this position to cart. Check cart!');
     changeNumberOfUnits('plus', id)
   } else {
     cart = [ ...cart, { ...prodItem, nmbOfUnits: 1}]; //or cart.push({...prodItem, nmbOfUnits: 1})
